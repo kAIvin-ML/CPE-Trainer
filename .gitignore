@@ -1,0 +1,8 @@
+# Ignore PEP 582-style local packages
+__pypackages__/
+
+# Bytecode and other junk
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
