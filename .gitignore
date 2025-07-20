@@ -7,7 +7,14 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Data Sources
+# Swap files from crashes
+*.swp
+
+# Data sources
 /texts/**
 !/texts/**/
 !/texts/**/.gitkeep
+
+# Statistics
+/stats/
+!/stats/.gitkeep
