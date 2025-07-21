@@ -5,7 +5,7 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 from utils import file_path_provided, is_not_empty_txt
-from data_handler import get_text_from_file
+from data_handler import get_text_from_file, get_cefr_levels
 
 
 def main():
@@ -18,6 +18,7 @@ def main():
     if file_path_provided(sys.argv) and is_not_empty_txt(sys.argv[1]):
         text_path = sys.argv[1]
     text = get_text_from_file(text_path)
+    words = text.split(" ")
 
     # Output the content given
     print("==========BEGIN=========")
@@ -29,12 +30,20 @@ def main():
 
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off') 
+    plt.axis('off')
     plt.tight_layout()
-    # plt.show() # --> Can be enabled 
+    # plt.show() # --> Can be enabled
 
     wordcloud.to_file(f"stats/wordcloud_{timestamp}.png")
 
+    # Map words to CEFR levels
+    cefr_dict = get_cefr_levels()
+
+    for word in words:
+        if word in cefr_dict['word']:
+            # Creates gap cloze
+            # Creates stats
+            pass
 
 if __name__ == "__main__":
     main()
