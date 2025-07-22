@@ -81,8 +81,13 @@ def display_menu():
 
 
 def main():
-    is_running = True
-    while is_running:
+    app_context = {
+        "is_running": True,
+        "current_text": None,
+        "text_file_path": None
+    }
+    
+    while app_context["is_running"]:
         display_menu()
         choice = input("Please enter your choice by entering the corresponding number: ")
         match choice:
@@ -103,10 +108,10 @@ def main():
                 input("\nPress Enter to continue...")
                 continue
 
-        is_running = continue_running
+        app_context["is_running"] = continue_running
                 
-        if is_running:
-            input(">>> Press Enter to display the menu again. <<< ")
+        if app_context["is_running"]:
+            input(">>> Press Enter to display the menu again. <<<")
 
 
 """
