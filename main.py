@@ -46,14 +46,32 @@ def analyze_speech(app_context):
 
 
 def view_settings(app_context):
-    print("Your settings are:")
-
-    # Code to show the settings
+    # Display current text path
+    while app_context["text_file_path"] is None:
+        print("You haven't selected a text file, yet.")
+        app_context["text_file_path"] = input("Please enter your text file path.\nFor instance: 'data/project-gutenberg/pride_and_prejudice.txt'\n")
+    
+    separator = "=" * 50
+    print(separator)
+    print(f"Your current text file is:\n{app_context['text_file_path']}")
+    print(separator)
+    
+    # Change the input if desired
+    change_source = input("If you want to change the source, please press 1. Otherwise press any key.\n")
+    if change_source == '1':
+        app_context["text_file_path"] = input("Please enter your new text file path.\n")
+        
+    # Generate a preview of the first 5 lines
+    print(separator)
+    print("Preview of the selected text:")
+    pass
+    print(separator)
 
     
 def exit_app(app_context):
     print("Exiting application.")
     app_context["is_running"] = False
+
 
 def display_menu():
     print("========== Menu ==========")
@@ -93,7 +111,6 @@ def main():
                 print("Invalid choice. Please enter a number from the menu.")
                 input("\nPress Enter to continue...")
                 continue
-
 
         if app_context["is_running"]:
             input(">>> Press Enter to display the menu again. <<<")
