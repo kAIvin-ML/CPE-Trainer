@@ -9,65 +9,51 @@ from utils import file_path_provided, is_not_empty_txt
 from data_handler import get_text_from_file, get_cefr_levels
 
 
-def call_choice(choice, func):
+def call_choice(app_context, choice, func):
     separator_str = "-" * 75
     print(separator_str)
     print(f"You selected: {choice}.")
-    continue_running = func()
+    func(app_context)
     print(separator_str)
+    
 
-    return continue_running
-
-
-def display_text():
+def display_text(app_context):
     print("The text will now be shown.")
     print("To change the text go to settings.")
     input("Press Enter to display the text.")
     
     # Code to display the text
-    
-    return True
 
 
-def display_gap_cloze():
+def display_gap_cloze(app_context):
     print("The gap cloze will now be shown.")
     print("To change the text go to settings.")
     input("Press Enter to display the text.")
 
     # Code to display the gap cloze
-    
-    return True    
 
 
-def generate_exercises():
+def generate_exercises(app_context):
     print("Here you can generate some exercises with Gen AI.")
 
     # Code to generate some exercises
-    
-    return True  
 
 
-def analyze_speech():
+def analyze_speech(app_context):
     print("Here you can let AI analyze your speech.")
 
     # Code to analyze your speech
-    
-    return True  
 
 
-def view_settings():
+def view_settings(app_context):
     print("Your settings are:")
 
     # Code to show the settings
+
     
-    return True    
-    
-    
-def exit_app():
+def exit_app(app_context):
     print("Exiting application.")
-
-    return False
-
+    app_context["is_running"] = False
 
 def display_menu():
     print("========== Menu ==========")
@@ -92,24 +78,23 @@ def main():
         choice = input("Please enter your choice by entering the corresponding number: ")
         match choice:
             case '1':
-                continue_running = call_choice(choice, display_text)
+                call_choice(app_context, choice, display_text)
             case '2':
-                continue_running = call_choice(choice, display_gap_cloze)
+                call_choice(app_context, choice, display_gap_cloze)
             case '3':
-                continue_running = call_choice(choice, generate_exercises)
+                call_choice(app_context, choice, generate_exercises)
             case '4':
-                continue_running = call_choice(choice, analyze_speech)
+                call_choice(app_context, choice, analyze_speech)
             case '8':
-                continue_running = call_choice(choice, view_settings)
+                call_choice(app_context, choice, view_settings)
             case '9':
-                continue_running = call_choice(choice, exit_app)
+                call_choice(app_context, choice, exit_app)
             case _:
                 print("Invalid choice. Please enter a number from the menu.")
                 input("\nPress Enter to continue...")
                 continue
 
-        app_context["is_running"] = continue_running
-                
+
         if app_context["is_running"]:
             input(">>> Press Enter to display the menu again. <<<")
 
