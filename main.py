@@ -9,11 +9,114 @@ from utils import file_path_provided, is_not_empty_txt
 from data_handler import get_text_from_file, get_cefr_levels
 
 
+def call_choice(choice, func):
+    separator_str = "-" * 75
+    print(separator_str)
+    print(f"You selected: {choice}.")
+    continue_running = func()
+    print(separator_str)
+
+    return continue_running
+
+
+def display_text():
+    print("The text will now be shown.")
+    print("To change the text go to settings.")
+    input("Press Enter to display the text.")
+    
+    # Code to display the text
+    
+    return True
+
+
+def display_gap_cloze():
+    print("The gap cloze will now be shown.")
+    print("To change the text go to settings.")
+    input("Press Enter to display the text.")
+
+    # Code to display the gap cloze
+    
+    return True    
+
+
+def generate_exercises():
+    print("Here you can generate some exercises with Gen AI.")
+
+    # Code to generate some exercises
+    
+    return True  
+
+
+def analyze_speech():
+    print("Here you can let AI analyze your speech.")
+
+    # Code to analyze your speech
+    
+    return True  
+
+
+def view_settings():
+    print("Your settings are:")
+
+    # Code to show the settings
+    
+    return True    
+    
+    
+def exit_app():
+    print("Exiting application.")
+
+    return False
+
+
+def display_menu():
+    print("========== Menu ==========")
+    print("|1. Display text         |")
+    print("|2. Display gap cloze    |")
+    print("|3. Generate exercise    |")
+    print("|4. Analyze speech       |")
+    print("|8. View settings        |")
+    print("|9. Exit                 |")
+    print("==========================")
+
+
 def main():
+    is_running = True
+    while is_running:
+        display_menu()
+        choice = input("Please enter your choice by entering the corresponding number: ")
+        match choice:
+            case '1':
+                continue_running = call_choice(choice, display_text)
+            case '2':
+                continue_running = call_choice(choice, display_gap_cloze)
+            case '3':
+                continue_running = call_choice(choice, generate_exercises)
+            case '4':
+                continue_running = call_choice(choice, analyze_speech)
+            case '8':
+                continue_running = call_choice(choice, view_settings)
+            case '9':
+                continue_running = call_choice(choice, exit_app)
+            case _:
+                print("Invalid choice. Please enter a number from the menu.")
+                input("\nPress Enter to continue...")
+                continue
+
+        is_running = continue_running
+                
+        if is_running:
+            input(">>> Press Enter to display the menu again. <<< ")
+
+
+"""
 
     # Initialize time variable for naming
     now = dt.datetime.now()
     timestamp = now.strftime("%Y_%m_%d__%H_%M_%S")
+
+    text_path = sys.argv[1]
+    text = get_text_from_file(text_path)
 
     # Load a text file
     if file_path_provided(sys.argv) and is_not_empty_txt(sys.argv[1]):
@@ -65,6 +168,9 @@ def main():
     df_file_name = f"stats/text_analyzed_{timestamp}.csv"
     df_sorted.to_csv(df_file_name, index = False)
     print("Saved statistics to folder 'stats'.")
+
+
+"""
 
 
 if __name__ == "__main__":
