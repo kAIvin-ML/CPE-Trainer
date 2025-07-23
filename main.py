@@ -23,6 +23,9 @@ def display_text(app_context):
     input("Press Enter to display the text.")
     
     # Code to display the text
+    
+    text = " ".join(app_context["current_text"])
+    print(text)
 
 
 def display_gap_cloze(app_context):
@@ -32,6 +35,31 @@ def display_gap_cloze(app_context):
 
     # Code to display the gap cloze
 
+    # Prepare the dictionary
+    cefr_dict = get_cefr_levels()
+    cefr_dict['count'] = [0] * len(cefr_dict['word'])
+
+    cloze = []
+
+    # Create gap cloze
+    for word in app_context["current_text"]:
+        if word in cefr_dict['word']:
+            index = cefr_dict['word'].index(word)
+            cefr_dict['count'][index] += 1
+            word_length = len(word)
+            gap = word.replace(word, "_" * word_length) + f" ({cefr_dict['level'][index]})"
+            cloze.append(gap)
+        else:
+            cloze.append(word)
+
+    # Stitch text together
+    gap_cloze = (" ").join(cloze)
+
+    # Output the content given
+    print("==========BEGIN=========")
+    print(gap_cloze)
+    print("=========END=========")
+    
 
 def generate_exercises(app_context):
     print("Here you can generate some exercises with Gen AI.")
@@ -88,9 +116,12 @@ def main():
     app_context = {
         "is_running": True,
         "current_text": None,
-        "text_file_path": None
+        "text_file_path": "texts/project-gutenberg/pride_and_prejudice.txt" #None
     }
     
+    text = get_text_from_file(app_context["text_file_path"])
+    app_context["current_text"] = text.split(" ")
+        
     while app_context["is_running"]:
         display_menu()
         choice = input("Please enter your choice by entering the corresponding number: ")
@@ -122,15 +153,6 @@ def main():
     now = dt.datetime.now()
     timestamp = now.strftime("%Y_%m_%d__%H_%M_%S")
 
-    text_path = sys.argv[1]
-    text = get_text_from_file(text_path)
-
-    # Load a text file
-    if file_path_provided(sys.argv) and is_not_empty_txt(sys.argv[1]):
-        text_path = sys.argv[1]
-    text = get_text_from_file(text_path)
-    words = text.split(" ")
-
     # Generate and save word cloud
     wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
 
@@ -143,31 +165,6 @@ def main():
     # wordcloud.to_file(f"stats/wordcloud_{timestamp}.png") # Can be enabled to save the wordcloud
 
     # Map words to CEFR levels
-
-    # Prepare the dictionary
-    cefr_dict = get_cefr_levels()
-    cefr_dict['count'] = [0] * len(cefr_dict['word'])
-
-    cloze = []
-
-    # Create gap cloze
-    for word in words:
-        if word in cefr_dict['word']:
-            index = cefr_dict['word'].index(word)
-            cefr_dict['count'][index] += 1
-            word_length = len(word)
-            gap = word.replace(word, "_" * word_length)
-            cloze.append(gap)
-        else:
-            cloze.append(word)
-
-    # Stitch text together
-    gap_cloze = (" ").join(cloze)
-
-    # Output the content given
-    print("==========BEGIN=========")
-    print(gap_cloze)
-    print("=========END=========")
 
     # Creates stats
     df_from_dict = pd.DataFrame(cefr_dict)
@@ -182,3 +179,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
