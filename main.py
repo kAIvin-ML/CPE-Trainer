@@ -18,14 +18,29 @@ def call_choice(app_context, choice, func):
     
 
 def display_text(app_context):
+    # Initialize time variable for naming
+    now = dt.datetime.now()
+    timestamp = now.strftime("%Y_%m_%d__%H_%M_%S")
+    
     print("The text will now be shown.")
     print("To change the text go to settings.")
     input("Press Enter to display the text.")
     
     # Code to display the text
-    
     text = " ".join(app_context["current_text"])
     print(text)
+    
+    # Generate and save word cloud
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
+
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis('off')
+    plt.tight_layout()
+    # plt.show() # --> Can be enabled
+
+    # Save wordcloud
+    wordcloud.to_file(f"stats/wordcloud_{timestamp}.png")
 
 
 def display_gap_cloze(app_context):
@@ -148,22 +163,6 @@ def main():
 
 
 """
-
-    # Initialize time variable for naming
-    now = dt.datetime.now()
-    timestamp = now.strftime("%Y_%m_%d__%H_%M_%S")
-
-    # Generate and save word cloud
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
-
-    plt.figure(figsize=(10, 5))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off')
-    plt.tight_layout()
-    # plt.show() # --> Can be enabled
-
-    # wordcloud.to_file(f"stats/wordcloud_{timestamp}.png") # Can be enabled to save the wordcloud
-
     # Map words to CEFR levels
 
     # Creates stats
@@ -172,8 +171,6 @@ def main():
     df_file_name = f"stats/text_analyzed_{timestamp}.csv"
     df_sorted.to_csv(df_file_name, index = False)
     print("Saved statistics to folder 'stats'.")
-
-
 """
 
 
