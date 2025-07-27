@@ -91,12 +91,6 @@ def display_gap_cloze(app_context):
     print("==========BEGIN=========")
     print(gap_cloze)
     print("=========END=========")
-    
-
-def generate_exercises(app_context):
-    print("Here you can generate some exercises with Gen AI.")
-
-    # Code to generate some exercises
 
 
 def analyze_speech(app_context):
@@ -137,8 +131,7 @@ def display_menu():
     print("========== Menu ==========")
     print("|1. Display text         |")
     print("|2. Display gap cloze    |")
-    print("|3. Generate exercise    |")
-    print("|4. Analyze speech       |")
+    print("|3. Analyze speech       |")
     print("|8. View settings        |")
     print("|9. Exit                 |")
     print("==========================")
