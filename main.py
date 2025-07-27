@@ -61,7 +61,7 @@ def display_text(app_context):
 
 
 def display_gap_cloze(app_context):
-    print("The gap cloze will now be shown.")
+    print("The open cloze will now be shown.")
     print("To change the text go to settings.")
     input("Press Enter to display the text.")
 
@@ -73,7 +73,7 @@ def display_gap_cloze(app_context):
 
     cloze = []
 
-    # Create gap cloze
+    # Create open cloze
     for word in app_context["current_text"]:
         if word in cefr_dict['word']:
             index = cefr_dict['word'].index(word)
@@ -85,11 +85,11 @@ def display_gap_cloze(app_context):
             cloze.append(word)
 
     # Stitch text together
-    gap_cloze = (" ").join(cloze)
+    open_cloze = (" ").join(cloze)
 
     # Output the content given
     print("==========BEGIN=========")
-    print(gap_cloze)
+    print(open_cloze)
     print("=========END=========")
 
 
@@ -130,7 +130,7 @@ def exit_app(app_context):
 def display_menu():
     print("========== Menu ==========")
     print("|1. Display text         |")
-    print("|2. Display gap cloze    |")
+    print("|2. Display open cloze   |")
     print("|3. Analyze speech       |")
     print("|8. View settings        |")
     print("|9. Exit                 |")
