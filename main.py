@@ -41,6 +41,23 @@ def display_text(app_context):
 
     # Save wordcloud
     wordcloud.to_file(f"stats/wordcloud_{timestamp}.png")
+    
+    # Create stats of word difficulty and frequency
+    cefr_dict = get_cefr_levels()
+    word_frequency_dict = {
+        "word": [],
+        "frequency": []
+    }
+    for word in cefr_dict["word"]:
+        word_frequency = text.count(word)
+        if word_frequency > 0:
+            word_frequency_dict["word"].append(word)
+            word_frequency_dict["frequency"].append(word_frequency)
+    df_word_frequency = pd.DataFrame(word_frequency_dict)
+    sorted_df_w_freq = df_word_frequency.sort_values(by="frequency", ascending = False)
+    sorted_df_file_name = f"stats/text_analyzed_{timestamp}.csv"
+    sorted_df_w_freq.to_csv(sorted_df_file_name, index = False)
+    print("Saved statistics to folder 'stats'.")
 
 
 def display_gap_cloze(app_context):
@@ -160,18 +177,6 @@ def main():
 
         if app_context["is_running"]:
             input(">>> Press Enter to display the menu again. <<<")
-
-
-"""
-    # Map words to CEFR levels
-
-    # Creates stats
-    df_from_dict = pd.DataFrame(cefr_dict)
-    df_sorted = df_from_dict.sort_values(by='count', ascending = False)
-    df_file_name = f"stats/text_analyzed_{timestamp}.csv"
-    df_sorted.to_csv(df_file_name, index = False)
-    print("Saved statistics to folder 'stats'.")
-"""
 
 
 if __name__ == "__main__":
