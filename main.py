@@ -60,12 +60,18 @@ def display_text(app_context):
     print("Saved statistics to folder 'stats'.")
 
 
-def display_gap_cloze(app_context):
-    print("The gap cloze will now be shown.")
+def display_mc_lexical_cloze(app_context):
+    print("The Exercise 'Multiple Choice Lexical Cloze' will now be shown.")
     print("To change the text go to settings.")
-    input("Press Enter to display the text.")
+    input("Press Enter to display the exercise.")
+    
+    pass
+    
 
-    # Code to display the gap cloze
+def display_open_cloze(app_context):
+    print("The Exercise 'Open Cloze' will now be shown.")
+    print("To change the text go to settings.")
+    input("Press Enter to display the exercise.")
 
     # Prepare the dictionary
     cefr_dict = get_cefr_levels()
@@ -73,7 +79,7 @@ def display_gap_cloze(app_context):
 
     cloze = []
 
-    # Create gap cloze
+    # Create open cloze
     for word in app_context["current_text"]:
         if word in cefr_dict['word']:
             index = cefr_dict['word'].index(word)
@@ -85,24 +91,32 @@ def display_gap_cloze(app_context):
             cloze.append(word)
 
     # Stitch text together
-    gap_cloze = (" ").join(cloze)
+    open_cloze = (" ").join(cloze)
 
     # Output the content given
-    print("==========BEGIN=========")
-    print(gap_cloze)
-    print("=========END=========")
+    print(open_cloze)
+
+
+def display_word_formation(app_context):
+    print("The exercise 'Word Formation' will now be shown.")
+    print("To change the text go to settings.")
+    input("Press Enter to display the exercise.")
     
-
-def generate_exercises(app_context):
-    print("Here you can generate some exercises with Gen AI.")
-
-    # Code to generate some exercises
-
-
+    pass
+    
+    
+def display_key_word_transformation(app_context):
+    print("The exercise 'Key Word Transformation' will now be shown.")
+    print("To change the text go to settings.")
+    input("Press Enter to display the exercise.")
+    
+    pass
+    
+    
 def analyze_speech(app_context):
     print("Here you can let AI analyze your speech.")
 
-    # Code to analyze your speech
+    pass
 
 
 def view_settings(app_context):
@@ -134,14 +148,16 @@ def exit_app(app_context):
 
 
 def display_menu():
-    print("========== Menu ==========")
-    print("|1. Display text         |")
-    print("|2. Display gap cloze    |")
-    print("|3. Generate exercise    |")
-    print("|4. Analyze speech       |")
-    print("|8. View settings        |")
-    print("|9. Exit                 |")
-    print("==========================")
+    print("==================== Menu ===================")
+    print("|1. Display Text                            |")
+    print("|2. Exercise: Multiple Choice Lexical Cloze |")
+    print("|3. Exercise: Open Cloze                    |")
+    print("|4. Exercise: Word Formation                |")
+    print("|5. Exercise: Key Word Transformation       |")
+    print("|6. Analyze Speech                          |")
+    print("|8. View settings                           |")
+    print("|9. Exit                                    |")
+    print("=============================================")
 
 
 def main():
@@ -161,10 +177,14 @@ def main():
             case '1':
                 call_choice(app_context, choice, display_text)
             case '2':
-                call_choice(app_context, choice, display_gap_cloze)
+                call_choice(app_context, choice, display_mc_lexical_cloze)
             case '3':
-                call_choice(app_context, choice, generate_exercises)
+                call_choice(app_context, choice, display_open_cloze)
             case '4':
+                call_choice(app_context, choice, display_word_formation)
+            case '5':
+                call_choice(app_context, choice, display_key_word_transformation)
+            case '6':
                 call_choice(app_context, choice, analyze_speech)
             case '8':
                 call_choice(app_context, choice, view_settings)
