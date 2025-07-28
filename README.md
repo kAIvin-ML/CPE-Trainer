@@ -42,30 +42,44 @@ The Proficiency Trainer allows anyone to refresh and deepen their English skills
 <!-- Use Cases -->
 ### Use Cases
 
-Placeholder
+The use cases will be updated soon.
 
 <!-- Motivation -->
 ## Motivation
 
-Placeholder
+The motivation will be updated soon.
 
 <!-- Getting Started -->
 ## Getting Started
 
-Placeholder
+Gitclone the repo and run main.py with:
+
+> uv run python3 main.py
+
+Follow the commands on the CLI.
 
 <!-- Usage -->
 ## Usage
 
-Placeholder
+This will be updated soon.
 
 <!-- Documentation -->
 ## Documentation
 
-Placeholder
+This will be updated soon with a documentation of the commands and their usage.
 
 <!-- Pipeline and Roadmap -->
 ## Pipeline and Roadmap
+
+| Feature | Technology |
+|---------|------------|
+| Full Isolation | Docker |
+| Integrate Exercises | Python Standard Library and NLTK | 
+| Hints for Words | Gemini API |
+| Update the Dataset (Cambridge levels) | MonkeyOCR to CSV |
+| Persisting Settings, Preferences and Behaviour | PostgreSQL |
+| Speech Analysis | Speech Foundation Model tbd |
+| possibly: GUI | tkinter |
 
 <!-- Contributing -->
 ## Contributing
