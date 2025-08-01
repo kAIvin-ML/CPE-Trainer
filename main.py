@@ -7,6 +7,7 @@ import pandas as pd
 
 from utils import file_path_provided, is_not_empty_txt
 from data_handler import get_text_from_file, get_cefr_levels
+from text_functionality import create_gap_text
 
 
 def call_choice(app_context, choice, func):
@@ -73,28 +74,14 @@ def display_open_cloze(app_context):
     print("To change the text go to settings.")
     input("Press Enter to display the exercise.")
 
-    # Prepare the dictionary
-    cefr_dict = get_cefr_levels()
-    cefr_dict['count'] = [0] * len(cefr_dict['word'])
+    # Convert text to a list of words with gaps ("_")
+    cloze_words = create_gap_text(app_context["current_text"])
 
-    cloze = []
-
-    # Create open cloze
-    for word in app_context["current_text"]:
-        if word in cefr_dict['word']:
-            index = cefr_dict['word'].index(word)
-            cefr_dict['count'][index] += 1
-            word_length = len(word)
-            gap = word.replace(word, "_" * word_length) + f" ({cefr_dict['level'][index]})"
-            cloze.append(gap)
-        else:
-            cloze.append(word)
-
-    # Stitch text together
-    open_cloze = (" ").join(cloze)
+    # Combine words to text
+    cloze = (" ").join(cloze_words)
 
     # Output the content given
-    print(open_cloze)
+    print(cloze)
 
 
 def display_word_formation(app_context):
@@ -164,6 +151,8 @@ def main():
     app_context = {
         "is_running": True,
         "current_text": None,
+        "current_gap_text": None,
+        "current_gap": 0,
         "text_file_path": "texts/project-gutenberg/pride_and_prejudice.txt" #None
     }
     
