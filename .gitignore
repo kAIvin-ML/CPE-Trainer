@@ -17,6 +17,7 @@ __pycache__/
 /texts/**
 !/texts/**/
 !/texts/**/.gitkeep
+!/texts/project-gutenberg/sample_text_file.txt
 
 /data/**
 !/data/CEFR_levels_dummy_file.csv

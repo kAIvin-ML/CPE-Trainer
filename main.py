@@ -11,7 +11,7 @@ def main():
         "current_text": None,
         "current_gap_text": None,
         "current_gap": 0,
-        "text_file_path": "texts/project-gutenberg/pride_and_prejudice_selection.txt" #None
+        "text_file_path": "texts/project-gutenberg/sample_text_file.txt" #None
     }
 
     # For testing purposes: loads a text to the context dict

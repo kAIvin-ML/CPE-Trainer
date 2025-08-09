@@ -170,7 +170,7 @@ def view_settings(app_context):
     # Display current text path
     while app_context["text_file_path"] is None:
         print("You haven't selected a text file, yet.")
-        app_context["text_file_path"] = input("Please enter your text file path.\nFor instance: 'data/project-gutenberg/pride_and_prejudice.txt'\n")
+        app_context["text_file_path"] = input("Please enter your text file path.\nFor instance: 'data/project-gutenberg/sample_text_file.txt'\n")
     
     separator_equalsign_50()
     print(f"Your current text file is:\n{app_context['text_file_path']}")
